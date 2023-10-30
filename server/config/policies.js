@@ -25,5 +25,6 @@ module.exports.policies = {
 
   'show-config': true,
   'access-tokens/create': true,
-  'access-tokens/exchange-using-oidc': true,
+  'boards/board': true,
+  'access-tokens/exchange-using-oidc': true
 };
