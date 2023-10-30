@@ -24,4 +24,5 @@ module.exports.policies = {
   'projects/create': ['is-authenticated', 'is-admin'],
 
   'access-tokens/create': true,
+  'boards/board': true,
 };
