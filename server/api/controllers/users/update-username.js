@@ -1,6 +1,9 @@
 const bcrypt = require('bcrypt');
 
 const Errors = {
+  NOT_ENOUGH_RIGHTS: {
+    notEnoughRights: 'Not enough rights',
+  },
   USER_NOT_FOUND: {
     userNotFound: 'User not found',
   },
@@ -33,6 +36,9 @@ module.exports = {
   },
 
   exits: {
+    notEnoughRights: {
+      responseType: 'forbidden',
+    },
     userNotFound: {
       responseType: 'notFound',
     },
@@ -59,6 +65,10 @@ module.exports = {
 
     if (!user) {
       throw Errors.USER_NOT_FOUND;
+    }
+
+    if (user.email === sails.config.custom.defaultAdminEmail || user.isSso) {
+      throw Errors.NOT_ENOUGH_RIGHTS;
     }
 
     if (
