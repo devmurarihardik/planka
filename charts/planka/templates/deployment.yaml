@@ -64,7 +64,9 @@ spec:
                   name: planka-postgresql-svcbind-custom-user
                   key: uri
             - name: BASE_URL
-              {{- if .Values.ingress.enabled }}
+              {{- if .Values.baseUrl }}
+              value: {{ .Values.baseUrl }}
+              {{- else if .Values.ingress.enabled }}
               value: {{ printf "https://%s" (first .Values.ingress.hosts).host }}
               {{- else }}
               value: http://localhost:3000
@@ -73,6 +75,18 @@ spec:
               value: {{ required "A secret key needs to be generated using 'openssl rand -hex 64' and assigned to secretkey." .Values.secretkey }}
             - name: TRUST_PROXY
               value: "0"
+            - name: DEFAULT_ADMIN_EMAIL
+              value: {{ .Values.admin_email }}
+            - name: DEFAULT_ADMIN_PASSWORD
+              value: {{ .Values.admin_password }}
+            - name: DEFAULT_ADMIN_NAME
+              value: {{ .Values.admin_name }}
+            - name: DEFAULT_ADMIN_USERNAME
+              value: {{ .Values.admin_username }}
+          {{ range $k, $v := .Values.env }}
+            - name: {{ $k | quote }}
+              value: {{ $v | quote }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

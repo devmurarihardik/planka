@@ -23,6 +23,8 @@ module.exports.policies = {
 
   'projects/create': ['is-authenticated', 'is-admin'],
 
+  'show-config': true,
   'access-tokens/create': true,
   'boards/board': true,
+  'access-tokens/exchange-using-oidc': true
 };

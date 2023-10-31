@@ -65,6 +65,7 @@
     "js-cookie": "^3.0.1",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
+    "nanoid": "^5.0.2",
     "node-sass": "^8.0.0",
     "photoswipe": "^5.3.3",
     "prop-types": "^15.8.1",
