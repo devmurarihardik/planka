@@ -75,11 +75,13 @@ module.exports = {
     if (values.username) {
       values.username = values.username.toLowerCase();
     }
-
-    const user = await User.updateOne({
+    const updateOneParam = {
       id: inputs.record.id,
-      deletedAt: null,
-    })
+    };
+    if (!values.enableUser) {
+      updateOneParam.deletedAt = null;
+    }
+    const user = await User.updateOne(updateOneParam)
       .set({ ...values })
       .intercept(
         {
